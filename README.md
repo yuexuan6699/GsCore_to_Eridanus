@@ -1,0 +1,2 @@
+# GsCore_to_Eridanus
+为Eridanus框架开发的早柚核心Docs适配器插件。
