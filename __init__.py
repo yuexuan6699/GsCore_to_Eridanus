@@ -1,0 +1,1 @@
+plugin_description = "早柚核心Docs适配器"

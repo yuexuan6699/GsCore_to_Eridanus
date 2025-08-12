@@ -1,0 +1,16 @@
+# 早柚核心Docs适配器配置
+config:
+  # Bot ID
+  BOT_ID: "Eridanus"
+  # 早柚核心服务器IP地址
+  IP: "127.0.0.1"
+  # 早柚核心服务器端口
+  PORT: 8765
+  # 是否启用调试模式
+  DEBUG: false
+  # 日志级别
+  LOG_LEVEL: "INFO"
+  # 最大重连次数
+  MAX_RECONNECT_ATTEMPTS: 30
+  # 重连间隔(秒)
+  RECONNECT_INTERVAL: 5
