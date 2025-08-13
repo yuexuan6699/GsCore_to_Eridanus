@@ -12,16 +12,16 @@ GsCore_to_Eridanus V0.0.1
 > 类似ISSUES [#12] [#10] 
 
 
-[早柚核心](https://docs.sayu-bot.com/)
-**一套业务逻辑，多个平台支持！**
+**[早柚核心](https://docs.sayu-bot.com/)**
+一套业务逻辑，多个平台支持！
 
-**[详细文档](https://docs.sayu-bot.com)** ( [快速开始(安装)](https://docs.sayu-bot.com/Started/InstallCore.html) | [链接Bot](https://docs.sayu-bot.com/LinkBots/AdapterList.html) | [插件市场](https://docs.sayu-bot.com/InstallPlugins/PluginsList.html) )
+[详细文档](https://docs.sayu-bot.com) ( [快速开始(安装)](https://docs.sayu-bot.com/Started/InstallCore.html) | [链接Bot](https://docs.sayu-bot.com/LinkBots/AdapterList.html) | [插件市场](https://docs.sayu-bot.com/InstallPlugins/PluginsList.html) )
 
 
-[Eridanus](https://eridanus.netlify.app/)
- 基于 [OneBot](https://github.com/howmanybots/onebot/blob/master/README.md) 协议的多功能bot兼python开发框架
+**[Eridanus](https://eridanus.netlify.app/)**
+基于 [OneBot](https://github.com/howmanybots/onebot/blob/master/README.md) 协议的多功能bot兼python开发框架
 
-**[详细文档](https://eridanus.netlify.app)** ( [快速开始](https://eridanus.netlify.app/getting-started/) | [下载](https://github.com/AOrbitron/Eridanus/releases) )
+[详细文档](https://eridanus.netlify.app) ( [快速开始](https://eridanus.netlify.app/getting-started/) | [下载](https://github.com/AOrbitron/Eridanus/releases) )
 
 
 ## 注意事项！！！！！！
