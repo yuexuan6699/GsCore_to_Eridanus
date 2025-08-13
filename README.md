@@ -1,5 +1,7 @@
 # 为Eridanus框架开发的早柚核心Docs适配器
 
+(还没上传完毕，毕竟不会弄也懒得弄）
+
 GsCore_to_Eridanus V0.0.1
 
 这是一个为Eridanus框架开发的早柚核心Docs适配器插件。
@@ -49,4 +51,9 @@ GsCore_to_Eridanus V0.0.1
 
 启动Eridanus框架后，插件会自动连接到早柚核心服务器。确保早柚核心服务器已启动并监听指定的IP和端口。
 
+## 依赖的第三方模块
 
+### 直接在插件代码中导入的第三方模块：
+1. `aiofiles` - 用于异步文件操作
+2. `websockets` - 用于 WebSocket 连接
+3. `msgspec` - 用于高效的消息编码和解码
