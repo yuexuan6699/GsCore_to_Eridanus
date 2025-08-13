@@ -19,7 +19,7 @@ GsCore_to_Eridanus V0.0.1
 [Eridanus](https://eridanus.netlify.app/)
  基于 [OneBot](https://github.com/howmanybots/onebot/blob/master/README.md) 协议的多功能bot兼python开发框架
 
-**[详细文档](https://eridanus.netlify.app)** ( [快速开始](https://eridanus.netlify.app/getting-started/) | [下载](https://github.com/AOrbitron/Eridanus/releases)
+**[详细文档](https://eridanus.netlify.app)** ( [快速开始](https://eridanus.netlify.app/getting-started/) | [下载](https://github.com/AOrbitron/Eridanus/releases) )
 
 ## 注意事项！！！！！！
 
