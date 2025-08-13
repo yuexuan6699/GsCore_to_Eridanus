@@ -62,7 +62,17 @@ class ConfigService:
         Returns:
             插件配置字典
         """
-        return getattr(self.config, plugin_name, {}).get('config', {})
+        # 尝试通过getattr获取配置
+        plugin_config = getattr(self.config, plugin_name, None)
+        if plugin_config and hasattr(plugin_config, 'config'):
+            return plugin_config.config
+        
+        # 如果getattr失败，尝试直接从config.data中获取
+        if hasattr(self.config, 'data') and plugin_name in self.config.data:
+            return self.config.data[plugin_name].get('config', {})
+        
+        # 如果都失败了，返回空字典
+        return {}
     
     def update_plugin_config(self, plugin_name: str, config: dict):
         """

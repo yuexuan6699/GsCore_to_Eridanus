@@ -43,9 +43,9 @@ class GsCoreAdapter:
         self.bot = bot
         self.config = config
         self.is_connect = False
-        self.BOT_ID = config.gs_core.get("BOT_ID", "Eridanus")
-        self.IP = config.gs_core.get("IP", "127.0.0.1")
-        self.PORT = config.gs_core.get("PORT", 8765)
+        self.BOT_ID = config.get("BOT_ID", "Eridanus")
+        self.IP = config.get("IP", "127.0.0.1")
+        self.PORT = config.get("PORT", 8765)
         self.ws_url = f'ws://{self.IP}:{self.PORT}/ws/{self.BOT_ID}'
         self.msg_list = asyncio.queues.Queue()
         self.pending = []
@@ -169,8 +169,8 @@ class GsCoreAdapter:
         """
         重新连接到早柚核心
         """
-        max_retries = self.config.get('max_reconnect_attempts', 30)
-        retry_interval = self.config.get('reconnect_interval', 5)
+        max_retries = self.config.get('MAX_RECONNECT_ATTEMPTS', 30)
+        retry_interval = self.config.get('RECONNECT_INTERVAL', 5)
         
         for attempt in range(max_retries):
             await asyncio.sleep(retry_interval)
@@ -388,23 +388,23 @@ class GsCoreAdapter:
             return
             
         # 检查消息前缀 - 只在第一条Text消息上检查
-        prefix = self.config.gs_core.get('MESSAGE_PREFIX', '')
-        if prefix:
-            first_text_msg = None
-            for msg in event.message_chain:
-                if isinstance(msg, Text) and msg.text:
-                    first_text_msg = msg
-                    break
-            
-            if first_text_msg:
-                text_content = str(first_text_msg.text)
-                if not text_content.startswith(prefix):
-                    self.bot.logger.debug(f'消息前缀不匹配，跳过处理: {text_content}')
-                    return
+            prefix = self.config.get('MESSAGE_PREFIX', '')
+            if prefix:
+                first_text_msg = None
+                for msg in event.message_chain:
+                    if isinstance(msg, Text) and msg.text:
+                        first_text_msg = msg
+                        break
                 
-                # 去除前缀
-                new_text = text_content[len(prefix):].lstrip()
-                first_text_msg.text = new_text
+                if first_text_msg:
+                    text_content = str(first_text_msg.text)
+                    if not text_content.startswith(prefix):
+                        self.bot.logger.debug(f'消息前缀不匹配，跳过处理: {text_content}')
+                        return
+                    
+                    # 去除前缀
+                    new_text = text_content[len(prefix):].lstrip()
+                    first_text_msg.text = new_text
         
         # 确保已连接
         if not self.is_connect:
@@ -642,8 +642,17 @@ def main(bot, config):
         bot: Eridanus的Bot对象
         config: 配置管理器
     """
+    # 导入ConfigService
+    from .service.gs_config import ConfigService
+    
+    # 创建配置服务实例
+    config_service = ConfigService(config)
+    
+    # 获取gs_core配置
+    gs_core_config = config_service.get_plugin_config('gs_core')
+    
     # 创建适配器实例
-    adapter = GsCoreAdapter(bot, config.gs_core)
+    adapter = GsCoreAdapter(bot, gs_core_config)
     
     # 注册事件监听器
     @bot.on(GroupMessageEvent)
