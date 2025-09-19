@@ -43,7 +43,8 @@ GsCore_to_Eridanus V0.0.1
 
 ## 安装
 
-将整个`GsCore_to_Eridanus`目录复制到Eridanu/run的目录中。
+1.将整个`GsCore_to_Eridanus`目录复制到Eridanu/run的目录中。
+2.把`GsCore_to_Eridanus/msgspec下载.bat`复制到Eridanu的目录中先运行一次。
 
 ## 配置
 
