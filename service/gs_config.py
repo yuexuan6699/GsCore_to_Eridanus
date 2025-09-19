@@ -27,10 +27,11 @@ class ConfigService:
         Returns:
             核心配置字典
         """
+        # 正确的配置访问路径：config.{插件文件夹名}.{yaml文件名}[配置节点]
         return {
-            'BOT_ID': self.config.config.get('BOT_ID', 'Eridanus'),
-            'IP': self.config.config.get('IP', '127.0.0.1'),
-            'PORT': self.config.config.get('PORT', 8765),
+            'BOT_ID': self.config.GsCore_to_Eridanus.gs_core['config'].get('BOT_ID', 'Eridanus'),
+            'IP': self.config.GsCore_to_Eridanus.gs_core['config'].get('IP', '127.0.0.1'),
+            'PORT': self.config.GsCore_to_Eridanus.gs_core['config'].get('PORT', 8765),
         }
     
     def update_core_config(self, bot_id: str = None, ip: str = None, port: int = None):
@@ -43,14 +44,14 @@ class ConfigService:
             port: 端口号
         """
         if bot_id is not None:
-            self.config.config['BOT_ID'] = bot_id
+            self.config.GsCore_to_Eridanus.gs_core['config']['BOT_ID'] = bot_id
         if ip is not None:
-            self.config.config['IP'] = ip
+            self.config.GsCore_to_Eridanus.gs_core['config']['IP'] = ip
         if port is not None:
-            self.config.config['PORT'] = port
+            self.config.GsCore_to_Eridanus.gs_core['config']['PORT'] = port
         
         # 保存配置
-        self.config.save_yaml()
+        self.config.save_yaml("gs_core", plugin_name="GsCore_to_Eridanus")
     
     def get_plugin_config(self, plugin_name: str) -> dict:
         """
@@ -62,8 +63,9 @@ class ConfigService:
         Returns:
             插件配置字典
         """
-        return getattr(self.config, plugin_name, {}).get('config', {})
-    
+        # 正确的配置访问路径：config.{插件文件夹名}.{yaml文件名}[配置节点]
+        return getattr(self.config.GsCore_to_Eridanus, plugin_name, {}).get('config', {})
+
     def update_plugin_config(self, plugin_name: str, config: dict):
         """
         更新指定插件的配置
@@ -72,8 +74,12 @@ class ConfigService:
             plugin_name: 插件名称
             config: 新的配置字典
         """
-        if not hasattr(self.config, plugin_name):
-            setattr(self.config, plugin_name, {})
+        # 确保插件配置命名空间存在
+        if not hasattr(self.config.GsCore_to_Eridanus, plugin_name):
+            setattr(self.config.GsCore_to_Eridanus, plugin_name, {})
         
-        self.config[plugin_name]['config'] = config
-        self.config.save_yaml()
+        # 更新配置
+        self.config.GsCore_to_Eridanus[plugin_name]['config'] = config
+        
+        # 保存配置，指定正确的插件名称和配置文件名
+        self.config.save_yaml(plugin_name, plugin_name="GsCore_to_Eridanus")
