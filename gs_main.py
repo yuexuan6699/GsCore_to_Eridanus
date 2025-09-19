@@ -43,9 +43,10 @@ class GsCoreAdapter:
         self.bot = bot
         self.config = config
         self.is_connect = False
-        self.BOT_ID = config.gs_core.get("BOT_ID", "Eridanus")
-        self.IP = config.gs_core.get("IP", "127.0.0.1")
-        self.PORT = config.gs_core.get("PORT", 8765)
+        # 正确的配置访问路径：config.{插件文件夹名}.{yaml文件名}[配置节点]
+        self.BOT_ID = config.GsCore_to_Eridanus.gs_core['config'].get("BOT_ID", "Eridanus")
+        self.IP = config.GsCore_to_Eridanus.gs_core['config'].get("IP", "127.0.0.1")
+        self.PORT = config.GsCore_to_Eridanus.gs_core['config'].get("PORT", 8765)
         self.ws_url = f'ws://{self.IP}:{self.PORT}/ws/{self.BOT_ID}'
         self.msg_list = asyncio.queues.Queue()
         self.pending = []
@@ -388,7 +389,7 @@ class GsCoreAdapter:
             return
             
         # 检查消息前缀 - 只在第一条Text消息上检查
-        prefix = self.config.gs_core.get('MESSAGE_PREFIX', '')
+        prefix = self.config.GsCore_to_Eridanus.gs_core['config'].get('MESSAGE_PREFIX', '')
         if prefix:
             first_text_msg = None
             for msg in event.message_chain:
@@ -642,8 +643,8 @@ def main(bot, config):
         bot: Eridanus的Bot对象
         config: 配置管理器
     """
-    # 创建适配器实例
-    adapter = GsCoreAdapter(bot, config.gs_core)
+    # 创建适配器实例，直接传递config对象
+    adapter = GsCoreAdapter(bot, config)
     
     # 注册事件监听器
     @bot.on(GroupMessageEvent)
